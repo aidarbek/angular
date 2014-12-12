@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="node_modules/angular/angular.min.js">
+	</script>
+	<script src="app.js">
+	</script>
+	<style>
+		.editing-true
+		{
+			display: none;
+			color: red;
+		}
+		.show-field-false
+		{
+			display: none;
+		}
+		body{
+			margin-top: 70px;
+		}
+	</style>
+	<body ng-app="App">
+		<div ng-controller="User" class="container">
+			<div class="row">
+				<h1>
+					User's list:
+				</h1>
+				<div ng-repeat="user in Users track by $index">
+					<div class="col-md-3 col-md-offset-1 well" id="id-{{$index}}">
+						<div ng-show="!user.editing">
+								<div>
+				      				<h3>{{user.name}}</h3>
+				      				<h3>{{user.surname}}</h3>
+				      				<h3>{{user.mail}}</h3>
+									<button ng-click="Delete($index)" class="btn btn-danger">
+										Delete user
+									</button>
+									<button ng-click="Edit($index)" class="btn btn-success">
+										Edit user
+									</button>
+								</div>
+			
+						</div>
+						<div ng-show="user.editing">
+							<input class="form-control" ng-model="Users[$index].name" value="user.name">
+							<br>
+							<input class="form-control" ng-model="Users[$index].surname" value="user.surname">
+							<br>
+							<input class="form-control" ng-model="Users[$index].mail" value="user.mail">
+							<br>
+							<button ng-click="Save($index)" class="btn btn-success">
+								Save
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="userField" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Add new user</h4>
+			      </div>
+			      <div class="modal-body">
+			      		<div class="row">
+			      			<div class="col-md-12">
+				      		<div ng-show="err">
+				      			<div class="alert alert-danger">
+				      				You should fill all fields!
+				      			</div>
+				      		</div>
+				      		</div>
+				      	</div>
+					      	<div class="row">
+						        <div class="col-md-12">
+						      		<input class="form-control" ng-model="userCreation.name" placeholder="Name">
+						      		<br>
+							    </div>
+
+							    <div class="col-md-12">
+						      	    <input class="form-control"  ng-model="userCreation.surname" placeholder="Surname">
+						      	    <br>
+							    </div>
+
+							    <div class="col-md-12">
+						      	    <input class="form-control"  ng-model="userCreation.mail" placeholder="E-mail">
+							    </div>
+							</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button type="button" ng-click="AddToArray()" class="btn btn-primary">Add</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-1">
+					<button ng-click="Add()" class="btn btn-primary btn-lg">	
+						Add user
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
