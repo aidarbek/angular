@@ -1,38 +1,84 @@
-var App = angular.module('App', []);
-App.controller('User', ['$scope', function ($scope) {
-	$scope.Users = [
-		{
-			name: "Aidarbek",
-			surname: "Suleimenov",
-			mail: "aidarbek98@gmail.com",
-			editing: false,
+/*
+	Comment reference:
+		BE - BackEnd
+*/
 
-		}
-	];
-	$scope.userCreation = {};
-	$scope.err = false;
-	$scope.Add = function()
-	{
-		$('#userField').modal('show');
-		//$scope.Users.push({name: "Vasya", surname: "Pupkin", mail: "trololo@mail.ru", editing: false});
-	}
-	$scope.AddToArray = function()
-	{
-		if($scope.userCreation.name && $scope.userCreation.surname && $scope.userCreation.mail)
-		{	
-			$scope.err = false;
-			tmp = angular.copy($scope.userCreation);
-			$scope.Users.push(tmp);
-			$scope.userCreation = {};
-			$('#userField').modal('hide');
+var App = angular.module('App', []);
+function AddUser($scope)
+{
+	var url = ""; // we send POST request to
+					  // register new users to this URL
+					  // response should be in JSON
+					  //  and also contain a user ID in addition
+					  // to general user information(except password)
+		if($scope.userCreation.login && $scope.userCreation.full && $scope.userCreation.mail
+			&& $scope.userCreation.password && $scope.userCreation.passwordConfirm && $scope.userCreation.role)
+		{
+			// If fields are not empty	
+			if($scope.userCreation.password == $scope.userCreation.passwordConfirm)
+			{
+				//If password is confirmed
+				$scope.err = false;//There is no error
+				tmp = angular.copy($scope.userCreation);
+				//Next line should be commented, till the BE is available 
+				/*
+					$http.post(url, tmp).success(function(data){
+						$scope.Users.push(tmp);
+						$scope.userCreation = {};
+						$('#userField').modal('hide');
+					}).error(function(data, status){
+						err = status + " error";
+					});
+				*/
+				//Delete next 4 lines, when BE available
+				tmp.user_id = 1;
+				$scope.Users.push(tmp);
+				$scope.userCreation = {};
+				$('#userField').modal('hide');
+			}
+			else
+			{
+				$scope.err = "Password's are not equal!";
+			}
 		}
 		else
 		{
-			$scope.err = true;
+			console.log($scope.userCreation.login +" "+ $scope.userCreation.full +" "+$scope.userCreation.mail
+			+" "+ $scope.userCreation.password+" "+ $scope.userCreation.passwordConfirm +" "+ $scope.userCreation.role);
+			$scope.err = "You should fill all fields!";
 		}
+}
+App.factory('Users', function () {
+  return [];// Binds Users list between Controllers
+});
+
+App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $http) {
+	
+	$scope.Users = Users;
+	$scope.userCreation = {};
+	$scope.err = false;
+	$scope.isAdmin = true;
+	$scope.Add = function()
+	{
+		$('#userField').modal('show');
+	}
+	$scope.AddToArray = function()
+	{
+		AddUser($scope);
 	}
 	$scope.Delete = function(index)
 	{
+		var url = "";//We send a GET request on this URL, in which we say that 
+					//we want to delete a user with specific ID
+		// Should be commented till BE is not available
+		/*
+			$http.get(url).success(function(data){	
+				$("#id-"+index).fadeOut('slow', function(){
+					$scope.Users.splice(index, 1);
+				});
+			});
+		*/
+		// Delete next lines when BE is available
 		$("#id-"+index).fadeOut('slow', function(){
 			$scope.Users.splice(index, 1);
 		});
@@ -43,6 +89,14 @@ App.controller('User', ['$scope', function ($scope) {
 	}
 	$scope.Save = function(index)
 	{
+		var url = "";//We send a POST request here, which contain new information about 
+					// user with specific ID, which is described in $scopeUsers[index]
+		//Should be commented till BE is not available
+		/*
+			$http.post(url, $scope.Users[index]).success(function(data){
+				$scope.Users[index].editing = false;
+			});
+		*/
 		$scope.Users[index].editing = false;
 	}
 }]);
