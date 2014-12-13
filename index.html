@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+	</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="node_modules/angular/angular.min.js">
+	</script>
+	
+ 	 <script src="node_modules/angular-route/angular-route.min.js">
+ 	 </script>
+ 	 <script src="app.js">
+	</script>
+	<script src="register.js">
+	</script>
+	<script src="route.js">
+	</script>
+	<style>
+		.editing-true
+		{
+			display: none;
+			color: red;
+		}
+		.show-field-false
+		{
+			display: none;
+		}
+	</style>
+	<body ng-app="routeApp">
+		<div ng-view>
+		</div>
+	</body>
+</html>
