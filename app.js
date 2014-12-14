@@ -36,7 +36,6 @@ function AddUser($scope)
 				tmp.user_id = 1;
 				$scope.Users.push(tmp);
 				$scope.userCreation = {role: []};
-				$('#userField').modal('hide');
 			}
 			else
 			{
@@ -59,10 +58,10 @@ App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $ht
 	$scope.err = false;
 	$scope.isAdmin = true;
 	$scope.registring = false;
+	$scope.roles = ['student', 'mentor', 'admin'];
 	$scope.Role = function(role, index)
 	{
 		//console.log(role);
-		console.log(index);
 		if(typeof index === 'undefined')
 		{
 			if($scope.userCreation.role.indexOf(role) > -1)
@@ -96,7 +95,6 @@ App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $ht
 	}
 	$scope.Add = function()
 	{
-		$('#userField').modal('show');
 		$scope.registring = true;
 	}
 	$scope.AddToArray = function()

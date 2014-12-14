@@ -43,14 +43,14 @@
 											</button>
 										</td>
 								<td ng-show="user.editing">
-									<input class="form-control" ng-model="Users[$index].login" value="user.login">
+									<input placeholder="Login" class="form-control" ng-model="Users[$index].login" value="user.login">
 								</td>
 								
 								<td ng-show="user.editing">
-									<input class="form-control" ng-model="Users[$index].full" value="user.full">
+									<input placeholder="Full name" class="form-control" ng-model="Users[$index].full" value="user.full">
 								</td>
 								<td ng-show="user.editing">
-									<input class="form-control" ng-model="Users[$index].mail" value="user.mail">
+									<input placeholder="Email" class="form-control" ng-model="Users[$index].mail" value="user.mail">
 								</td>
 								<td ng-show="user.editing">
 									<input type="checkbox" ng-checked="Checked('student', $index)" ng-click="Role('student', $index)"> Student
