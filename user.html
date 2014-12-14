@@ -1,57 +1,42 @@
 
 		<div class="container">
-			<div class="row">
+			<!--<div class="row">-->
 				<h1>
 					User's list:
 				</h1>
 				<a href="#/register">
 					Go to registration page
 				</a>
-				<div ng-repeat="user in Users track by $index">
-					<div class="col-md-6 col-md-offset-3 well" id="id-{{$index}}">
-						<div ng-show="!user.editing">
-								<div>
-									<button ng-click="Delete($index)" type="button" class="close" >
-										<span aria-hidden="true">
-											<i class="glyphicon glyphicon-remove"></i> 
-										</span>
-										<span class="sr-only">
-											Close
-										</span>
-									</button>
-									<button ng-click="Edit($index)" type="button" class="close">
-										<span aria-hidden="true">
-											<i class="glyphicon glyphicon-pencil"></i>
-										</span>
-										<span class="sr-only">
-											Edit
-										</span>
-									</button>
-
-				      				<h4><b>Login: </b>{{user.login}}</h4>
-				      				<h4><b>Full name:</b>{{user.full}}</h4>
-				      				<h4><b>E-mail address: </b>{{user.mail}}</h4>
-				      				<h4><b>Role: </b>{{user.role}}</h4>
-									
-								</div>
-			
+				<table class="table table-hover">
+					<tr ng-repeat="user in Users track by $index">
+						<div class="col-md-6" id="id-{{$index}}">
+							<div ng-show="!user.editing">
+									<td>{{user.login}}</td>
+					      				<td>{{user.full}}</td>
+					      				<td>{{user.mail}}</td>
+					      				<td>{{user.role}}</td>
+										<td>
+											<a ng-click="Edit($index)" href="#">Edit</a>
+										</td>
+										<td>
+											<a ng-click="Delete($index)" href="#">Delete</a>
+										</td>
+				
+							</div>
+							<div ng-show="user.editing">
+								<td><input class="form-control" ng-model="Users[$index].login" value="user.login"></td>
+								
+								<td><input class="form-control" ng-model="Users[$index].full" value="user.full"></td>
+								<td><input class="form-control" ng-model="Users[$index].mail" value="user.mail"></td>
+								<td><input class="form-control" ng-model="Users[$index].role" value="user.role"></td>
+								<td><button ng-click="Save($index)" class="btn btn-success">
+									Save
+								</button></td>
+							</div>
 						</div>
-						<div ng-show="user.editing">
-							<input class="form-control" ng-model="Users[$index].login" value="user.login">
-							<br>
-							<input class="form-control" ng-model="Users[$index].full" value="user.full">
-							<br>
-							<input class="form-control" ng-model="Users[$index].mail" value="user.mail">
-							<br>
-							<input class="form-control" ng-model="Users[$index].role" value="user.role">
-							<br>
-							<button ng-click="Save($index)" class="btn btn-success">
-								Save
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+					</tr>
+				</table>
+			<!--</div>-->
 			<div class="modal fade" id="userField" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
