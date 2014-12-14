@@ -58,6 +58,7 @@ App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $ht
 	$scope.userCreation = {role: []};
 	$scope.err = false;
 	$scope.isAdmin = true;
+	$scope.registring = false;
 	$scope.Role = function(role, index)
 	{
 		//console.log(role);
@@ -84,12 +85,10 @@ App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $ht
 			{
 				$scope.Users[index].role.push(role);
 			}
-			console.log($scope.Users[index].role);
 		}
 	}
 	$scope.Checked = function(role, index)
 	{
-		console.log(role);
 		if($scope.Users[index].role.indexOf(role) > -1)
 			return "Checked";
 		else
@@ -98,10 +97,12 @@ App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $ht
 	$scope.Add = function()
 	{
 		$('#userField').modal('show');
+		$scope.registring = true;
 	}
 	$scope.AddToArray = function()
 	{
 		AddUser($scope);
+		$scope.registring = false;
 	}
 	$scope.Delete = function(index)
 	{
