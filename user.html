@@ -8,7 +8,6 @@
 					Go to registration page
 				</a>
 				<table class="table table-hover">
-<<<<<<< HEAD
 					<tr>
 						<td>
 							<b>Login</b>
@@ -64,34 +63,6 @@
 										Save
 									</button>
 								</td>
-=======
-					<tr ng-repeat="user in Users track by $index">
-						<div class="col-md-6" id="id-{{$index}}">
-							<div ng-show="!user.editing">
-									<td>{{user.login}}</td>
-					      				<td>{{user.full}}</td>
-					      				<td>{{user.mail}}</td>
-					      				<td>{{user.role}}</td>
-										<td>
-											<a ng-click="Edit($index)" href="#">Edit</a>
-										</td>
-										<td>
-											<a ng-click="Delete($index)" href="#">Delete</a>
-										</td>
-				
-							</div>
-							<div ng-show="user.editing">
-								<td><input class="form-control" ng-model="Users[$index].login" value="user.login"></td>
-								
-								<td><input class="form-control" ng-model="Users[$index].full" value="user.full"></td>
-								<td><input class="form-control" ng-model="Users[$index].mail" value="user.mail"></td>
-								<td><input class="form-control" ng-model="Users[$index].role" value="user.role"></td>
-								<td><button ng-click="Save($index)" class="btn btn-success">
-									Save
-								</button></td>
-							</div>
-						</div>
->>>>>>> FETCH_HEAD
 					</tr>
 				</table>
 			<!--</div>-->
