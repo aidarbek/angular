@@ -12,7 +12,8 @@ function AddUser($scope)
 					  //  and also contain a user ID in addition
 					  // to general user information(except password)
 		if($scope.userCreation.login && $scope.userCreation.full && $scope.userCreation.mail
-			&& $scope.userCreation.password && $scope.userCreation.passwordConfirm && $scope.userCreation.role)
+			&& $scope.userCreation.password && $scope.userCreation.passwordConfirm && $scope.userCreation.role
+			|| $scope.isAdmin == true)
 		{
 			// If fields are not empty	
 			if($scope.userCreation.password == $scope.userCreation.passwordConfirm)
@@ -20,6 +21,7 @@ function AddUser($scope)
 				//If password is confirmed
 				$scope.err = false;//There is no error
 				tmp = angular.copy($scope.userCreation);
+				tmp.editing = false;
 				//Next line should be commented, till the BE is available 
 				/*
 					$http.post(url, tmp).success(function(data){
@@ -33,7 +35,7 @@ function AddUser($scope)
 				//Delete next 4 lines, when BE available
 				tmp.user_id = 1;
 				$scope.Users.push(tmp);
-				$scope.userCreation = {};
+				$scope.userCreation = {role: []};
 				$('#userField').modal('hide');
 			}
 			else
@@ -43,21 +45,56 @@ function AddUser($scope)
 		}
 		else
 		{
-			console.log($scope.userCreation.login +" "+ $scope.userCreation.full +" "+$scope.userCreation.mail
-			+" "+ $scope.userCreation.password+" "+ $scope.userCreation.passwordConfirm +" "+ $scope.userCreation.role);
 			$scope.err = "You should fill all fields!";
 		}
 }
 App.factory('Users', function () {
-  return [];// Binds Users list between Controllers
+  return [{login: "aidarbek", full: "aidarbek", mail: "a@mail.com", role:['admin', 'mentor'],editing: false}];// Binds Users list between Controllers
 });
 
 App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $http) {
 	
 	$scope.Users = Users;
-	$scope.userCreation = {};
+	$scope.userCreation = {role: []};
 	$scope.err = false;
 	$scope.isAdmin = true;
+	$scope.Role = function(role, index)
+	{
+		//console.log(role);
+		console.log(index);
+		if(typeof index === 'undefined')
+		{
+			if($scope.userCreation.role.indexOf(role) > -1)
+			{
+				$scope.userCreation.role.splice(role, 1);
+			}
+			else
+			{
+				$scope.userCreation.role.push(role);
+			}
+			//console.log($scope.userCreation.role);
+		}
+		else
+		{	
+			if($scope.Users[index].role.indexOf(role) > -1)
+			{
+				$scope.Users[index].role.splice($scope.Users[index].role.indexOf(role), 1);
+			}
+			else
+			{
+				$scope.Users[index].role.push(role);
+			}
+			console.log($scope.Users[index].role);
+		}
+	}
+	$scope.Checked = function(role, index)
+	{
+		console.log(role);
+		if($scope.Users[index].role.indexOf(role) > -1)
+			return "Checked";
+		else
+			return "";
+	}
 	$scope.Add = function()
 	{
 		$('#userField').modal('show');

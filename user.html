@@ -1,57 +1,71 @@
 
 		<div class="container">
-			<div class="row">
+			<!--<div class="row">-->
 				<h1>
 					User's list:
 				</h1>
 				<a href="#/register">
 					Go to registration page
 				</a>
-				<div ng-repeat="user in Users track by $index">
-					<div class="col-md-6 col-md-offset-3 well" id="id-{{$index}}">
-						<div ng-show="!user.editing">
-								<div>
-									<button ng-click="Delete($index)" type="button" class="close" >
-										<span aria-hidden="true">
-											<i class="glyphicon glyphicon-remove"></i> 
-										</span>
-										<span class="sr-only">
-											Close
-										</span>
+				<table class="table table-hover">
+					<tr>
+						<td>
+							<b>Login</b>
+						</td>
+						<td>
+							<b>Full name</b>
+						</td>
+						<td>
+							<b>E-mail address</b>
+						</td>
+						<td>
+							<b>Roles</b>
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr ng-repeat="user in Users track by $index" id="id-{{$index}}">
+									<td ng-show="!user.editing">{{user.login}}</td>
+					      				<td ng-show="!user.editing">{{user.full}}</td>
+					      				<td ng-show="!user.editing">{{user.mail}}</td>
+					      				<td ng-show="!user.editing">{{user.role.join(', ')}}</td>
+										<td ng-show="!user.editing">
+											<button class="btn btn-success" ng-click="Edit($index)">
+												Edit
+											</button>
+										</td>
+										<td ng-show="!user.editing">
+											<button class="btn btn-danger" ng-click="Delete($index)">
+												Delete
+											</button>
+										</td>
+								<td ng-show="user.editing">
+									<input class="form-control" ng-model="Users[$index].login" value="user.login">
+								</td>
+								
+								<td ng-show="user.editing">
+									<input class="form-control" ng-model="Users[$index].full" value="user.full">
+								</td>
+								<td ng-show="user.editing">
+									<input class="form-control" ng-model="Users[$index].mail" value="user.mail">
+								</td>
+								<td ng-show="user.editing">
+									<input type="checkbox" ng-checked="Checked('student', $index)" ng-click="Role('student', $index)"> Student
+						      	    <br>
+						      	    <input type="checkbox" ng-checked="Checked('mentor', $index)" ng-click="Role('mentor', $index)"> Mentor
+						      	    <br>
+						      	    <input type="checkbox" ng-checked="Checked('admin', $index)" ng-click="Role('admin', $index)"> Admin
+								</td>
+								<td ng-show="user.editing">
+									<button ng-click="Save($index)" class="btn btn-success">
+										Save
 									</button>
-									<button ng-click="Edit($index)" type="button" class="close">
-										<span aria-hidden="true">
-											<i class="glyphicon glyphicon-pencil"></i>
-										</span>
-										<span class="sr-only">
-											Edit
-										</span>
-									</button>
-
-				      				<h4><b>Login: </b>{{user.login}}</h4>
-				      				<h4><b>Full name:</b>{{user.full}}</h4>
-				      				<h4><b>E-mail address: </b>{{user.mail}}</h4>
-				      				<h4><b>Role: </b>{{user.role}}</h4>
-									
-								</div>
-			
-						</div>
-						<div ng-show="user.editing">
-							<input class="form-control" ng-model="Users[$index].login" value="user.login">
-							<br>
-							<input class="form-control" ng-model="Users[$index].full" value="user.full">
-							<br>
-							<input class="form-control" ng-model="Users[$index].mail" value="user.mail">
-							<br>
-							<input class="form-control" ng-model="Users[$index].role" value="user.role">
-							<br>
-							<button ng-click="Save($index)" class="btn btn-success">
-								Save
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
+								</td>
+					</tr>
+				</table>
+			<!--</div>-->
 			<div class="modal fade" id="userField" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -93,7 +107,14 @@
 						      	    <br>
 							    </div>
 							    <div class="col-md-12">
-						      	    <input class="form-control"  ng-model="userCreation.role" placeholder="Role">
+							    	<b><h4>Choose roles:</h4> </b>
+							    	<br>
+						      	    <input type="checkbox" ng-click="Role('student')"> Student
+						      	    <br>
+						      	    <input type="checkbox" ng-click="Role('mentor')"> Mentor
+						      	    <br>
+						      	    <input type="checkbox" ng-click="Role('admin')"> Admin
+						      	    
 							    </div>
 							</div>
 			      </div>
