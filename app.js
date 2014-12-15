@@ -3,7 +3,7 @@
 		BE - BackEnd
 */
 
-var App = angular.module('App', []);
+var App = angular.module('App', ['ui.select']);
 function AddUser($scope)
 {
 	var url = ""; // we send POST request to

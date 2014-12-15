@@ -53,11 +53,12 @@
 									<input placeholder="Email" class="form-control" ng-model="Users[$index].mail" value="user.mail">
 								</td>
 								<td ng-show="user.editing">
-									<input type="checkbox" ng-checked="Checked('student', $index)" ng-click="Role('student', $index)"> Student
-						      	    <br>
-						      	    <input type="checkbox" ng-checked="Checked('mentor', $index)" ng-click="Role('mentor', $index)"> Mentor
-						      	    <br>
-						      	    <input type="checkbox" ng-checked="Checked('admin', $index)" ng-click="Role('admin', $index)"> Admin
+									<ui-select multiple tagging tagging-label="false" ng-model="Users[$index].role" theme="select2" ng-disabled="disabled" style="width: 300px;">
+										<ui-select-match placeholder="Select roles...">{{$item}}</ui-select-match>
+										<ui-select-choices repeat="role in roles | filter:$select.search">
+											{{role}}
+										</ui-select-choices>
+									</ui-select>
 								</td>
 								<td ng-show="user.editing">
 									<button ng-click="Save($index)" class="btn btn-success">
