@@ -1,111 +1,118 @@
 
-		<div class="container">
-			<!--<div class="row">-->
-				<h1>
-					User's list:
-				</h1>
-				<a href="#/register">
-					Go to registration page
-				</a>
-				<table class="table table-hover">
-					<tr>
-						<td>
-							<b>Login</b>
-						</td>
-						<td>
-							<b>Full name</b>
-						</td>
-						<td>
-							<b>E-mail address</b>
-						</td>
-						<td>
-							<b>Roles</b>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-					</tr>
-
-					<tr ng-repeat="user in Users track by $index" id="id-{{$index}}">
-									<td ng-show="!user.editing">{{user.login}}</td>
-					      				<td ng-show="!user.editing">{{user.full}}</td>
-					      				<td ng-show="!user.editing">{{user.mail}}</td>
-					      				<td ng-show="!user.editing">{{user.role.join(', ')}}</td>
-										<td ng-show="!user.editing">
-											<button class="btn btn-success" ng-click="Edit($index)">
-												Edit
-											</button>
-										</td>
-										<td ng-show="!user.editing">
-											<button class="btn btn-danger" ng-click="Delete($index)">
-												Delete
-											</button>
-										</td>
-								<td ng-show="user.editing">
-									<input placeholder="Login" class="form-control" ng-model="Users[$index].login" value="user.login">
-								</td>
-								
-								<td ng-show="user.editing">
-									<input placeholder="Full name" class="form-control" ng-model="Users[$index].full" value="user.full">
-								</td>
-								<td ng-show="user.editing">
-									<input placeholder="Email" class="form-control" ng-model="Users[$index].mail" value="user.mail">
-								</td>
-								<td ng-show="user.editing">
-									<ui-select multiple tagging tagging-label="false" ng-model="Users[$index].role" theme="select2" ng-disabled="disabled" style="width: 300px;">
-										<ui-select-match placeholder="Select roles...">{{$item}}</ui-select-match>
-										<ui-select-choices repeat="role in roles | filter:$select.search">
-											{{role}}
-										</ui-select-choices>
-									</ui-select>
-								</td>
-								<td ng-show="user.editing">
-									<button ng-click="Save($index)" class="btn btn-success">
-										Save
-									</button>
-								</td>
-					</tr>
-					<tr ng-show="registring">
-						<td>
-							<input class="form-control" ng-model="userCreation.login" placeholder="Login">
-						</td>
-						<td>
-							<input class="form-control"  ng-model="userCreation.full" placeholder="Full name">
-						</td>
-						<td>      	    
-							<input class="form-control"  ng-model="userCreation.mail" placeholder="E-mail">
-						</td>
-						<td>
-						    <input class="form-control" type="password" ng-model="userCreation.password" placeholder="Password">
-						</td>
-						<td>
-				      	    <input class="form-control" type="password" ng-model="userCreation.passwordConfirm" placeholder="Password again">
-						</td>
-						<td>
-					    	<input type="checkbox" ng-checked="!registring" ng-click="Role('student')"> Student
-				      	    <br>
-				      	    <input type="checkbox" ng-checked="!registring" ng-click="Role('mentor')"> Mentor
-				      	    <br>
-				      	    <input type="checkbox" ng-checked="!registring" ng-click="Role('admin')"> Admin
-						      	    
-						</td>
-						<td>
-							<button type="button" ng-click="AddToArray()" class="btn btn-primary">
-								Add
-							</button>
-						</td>
-					</tr>
-				</table>
-			<!--</div>-->
+<div class="container">
+	<h1>
+		User's list:
+	</h1>
+	<a href="#/register">
+		Go to registration page
+	</a>
+	<table class="table table-hover">
+		<tr>
+			<td>
+				<b>Login</b>
+			</td>
+			<td>
+				<b>Full name</b>
+			</td>
+			<td>
+				<b>E-mail address</b>
+			</td>
+			<td>
+				<b>Roles</b>
+			</td>
+			<td>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr ng-repeat="user in Users track by $index" id="id-{{$index}}">
+			<td ng-show="!user.editing">{{user.login}}</td>
+		   	<td ng-show="!user.editing">
+		      		{{user.full}}
+		    </td>
+		    <td ng-show="!user.editing">
+			   	{{user.mail}}
+					 </td>
+					 <td ng-show="!user.editing">
+					 	{{user.role.join(', ')}}
+					 </td>
+			<td ng-show="!user.editing">
+				<button class="btn btn-success" ng-click="Edit($index)">
+					Edit
+				</button>
+			</td>
+			<td ng-show="!user.editing">
+				<button class="btn btn-danger" ng-click="Delete($index)">
+					Delete
+				</button>
+			</td>
+			<td ng-show="user.editing">
+				<input placeholder="Login" class="form-control" ng-model="Users[$index].login" value="user.login">
+			</td>
 			
-			<div ng-show="isAdmin">
-				<div class="row">
-					<div class="col-md-offset-1">
-						<button ng-show="!registring" ng-click="Add()" class="btn btn-primary btn-lg">	
-							Add user
-						</button>
-					</div>
-				</div>
+			<td ng-show="user.editing">
+				<input placeholder="Full name" class="form-control" ng-model="Users[$index].full" value="user.full">
+			</td>
+			<td ng-show="user.editing">
+				<input placeholder="Email" class="form-control" ng-model="Users[$index].mail" value="user.mail">
+			</td>
+			<td ng-show="user.editing">
+				<ui-select multiple tagging tagging-label="false" ng-model="Users[$index].role" theme="select2" ng-disabled="disabled" style="width: 300px;">
+					<ui-select-match placeholder="Select roles...">
+						{{$item}}
+					</ui-select-match>
+					<ui-select-choices repeat="role in roles | filter:$select.search">
+								{{role}}
+					</ui-select-choices>
+				</ui-select>
+			</td>
+			<td ng-show="user.editing">
+				<button ng-click="Save($index)" class="btn btn-success">
+					Save
+				</button>
+			</td>
+		</tr>
+		<tr ng-show="registring">
+			<td>
+				<input class="form-control" ng-model="userCreation.login" placeholder="Login">
+			</td>
+			<td>
+				<input class="form-control"  ng-model="userCreation.full" placeholder="Full name">
+			</td>
+			<td>      	    
+				<input class="form-control"  ng-model="userCreation.mail" placeholder="E-mail">
+			</td>
+			<td>
+			    <input class="form-control" type="password" ng-model="userCreation.password" placeholder="Password">
+			</td>
+			<td>
+				<input class="form-control" type="password" ng-model="userCreation.passwordConfirm" placeholder="Password again">
+			</td>
+			<td>
+				<ui-select multiple tagging tagging-label="false" ng-model="userCreation.role" theme="select2" ng-disabled="disabled" style="width: 300px;">
+					<ui-select-match placeholder="Select roles...">
+						{{$item}}
+					</ui-select-match>
+					<ui-select-choices repeat="role in roles | filter:$select.search">
+								{{role}}
+					</ui-select-choices>
+				</ui-select>   
+			</td>
+			<td>
+				<button type="button" ng-click="AddToArray()" class="btn btn-primary">
+					Add
+				</button>
+			</td>
+		</tr>
+	</table>
+			
+	<div ng-show="isAdmin">
+		<div class="row">
+			<div class="col-md-offset-1">
+				<button ng-show="!registring" ng-click="Add()" class="btn btn-primary btn-lg">	
+					Add user
+				</button>
 			</div>
 		</div>
+	</div>
+</div>
