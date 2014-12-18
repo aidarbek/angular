@@ -8,56 +8,69 @@
 	</a>
 	<table class="table table-hover">
 		<tr>
-			<td>
+			<td class="col-md-2">
 				<b>Login</b>
 			</td>
-			<td>
+			<td class="col-md-2">
 				<b>Full name</b>
 			</td>
-			<td>
+			<td class="col-md-2">
 				<b>E-mail address</b>
 			</td>
-			<td>
+			<td class="col-md-2">
 				<b>Roles</b>
 			</td>
-			<td>
+			<td class="col-md-2">
 			</td>
-			<td>
+			<td class="col-md-2">
 			</td>
+			<td class="col-md-1">
+			</td>
+
 		</tr>
+		
 		<tr ng-repeat="user in Users track by $index" id="id-{{$index}}">
-			<td ng-show="!user.editing">{{user.login}}</td>
-		   	<td ng-show="!user.editing">
-		      		{{user.full}}
+
+			<td ng-show="!user.editing" class="col-md-1">
+		      	{{user.login}}
+		     </td>
+		   	<td ng-show="!user.editing" class="col-md-1">
+		      	{{user.full}}
 		    </td>
-		    <td ng-show="!user.editing">
-			   	{{user.mail}}
-					 </td>
-					 <td ng-show="!user.editing">
-					 	{{user.role.join(', ')}}
-					 </td>
-			<td ng-show="!user.editing">
+		    <td ng-show="!user.editing" class="col-md-1">
+		    	{{user.mail}}
+			</td>
+			<td ng-show="!user.editing" class="col-md-2">
+			 	{{user.role.join(', ')}}
+		      	
+			</td>
+			<td ng-show="!user.editing" class="col-md-1">
 				<button class="btn btn-success" ng-click="Edit($index)">
 					Edit
 				</button>
 			</td>
-			<td ng-show="!user.editing">
+			<td ng-show="!user.editing" class="col-md-1">
 				<button class="btn btn-danger" ng-click="Delete($index)">
 					Delete
 				</button>
 			</td>
-			<td ng-show="user.editing">
+			<td ng-show="!user.editing" class="col-md-1">
+			</td>
+
+			<!--USER EDITING BELOW-->
+
+			<td ng-show="user.editing" class="col-md-1">
 				<input placeholder="Login" class="form-control" ng-model="Users[$index].login" value="user.login">
 			</td>
 			
-			<td ng-show="user.editing">
+			<td ng-show="user.editing" class="col-md-1">
 				<input placeholder="Full name" class="form-control" ng-model="Users[$index].full" value="user.full">
 			</td>
-			<td ng-show="user.editing">
+			<td ng-show="user.editing" class="col-md-1">
 				<input placeholder="Email" class="form-control" ng-model="Users[$index].mail" value="user.mail">
 			</td>
-			<td ng-show="user.editing">
-				<ui-select id="role-{{$index}}" multiple tagging tagging-label="false" ng-model="Users[$index].role" theme="select2" ng-disabled="disabled" style="width: 300px;">
+			<td ng-show="user.editing" class="col-md-2">
+				<ui-select id="role-{{$index}}" multiple tagging tagging-label="false" ng-model="Users[$index].role" theme="bootstrap" ng-disabled="disabled" class="col-md-12">
 					<ui-select-match placeholder="Select roles...">
 						{{$item}}
 					</ui-select-match>
@@ -66,30 +79,28 @@
 					</ui-select-choices>
 				</ui-select>
 			</td>
-			<td ng-show="user.editing">
+			<td ng-show="user.editing" class="col-md-1">
 				<button ng-click="Save($index)" class="btn btn-success">
 					Save
 				</button>
 			</td>
+			<td ng-show="user.editing" class="col-md-1">
+			</td>
+			<td ng-show="user.editing" class="col-md-1">
+			</td>
 		</tr>
 		<tr ng-show="registring">
-			<td>
-				<input class="form-control" ng-model="userCreation.login" placeholder="Login">
+			<td class="col-md-1">
+				<input class="form-control col-md-12" ng-model="userCreation.login" placeholder="Login">
 			</td>
-			<td>
+			<td class="col-md-1">
 				<input class="form-control"  ng-model="userCreation.full" placeholder="Full name">
 			</td>
-			<td>      	    
+			<td class="col-md-1">      	    
 				<input class="form-control"  ng-model="userCreation.mail" placeholder="E-mail">
 			</td>
-			<td>
-			    <input class="form-control" type="password" ng-model="userCreation.password" placeholder="Password">
-			</td>
-			<td>
-				<input class="form-control" type="password" ng-model="userCreation.passwordConfirm" placeholder="Password again">
-			</td>
-			<td>
-				<ui-select multiple tagging tagging-label="false" id="role_input" ng-model="userCreation.role" theme="select2" ng-disabled="disabled" style="width: 300px;">
+			<td class="col-md-2">
+				<ui-select multiple tagging tagging-label="false" id="role_input" ng-model="userCreation.role" theme="bootstrap" ng-disabled="disabled">
 					<ui-select-match placeholder="Select roles...">
 						{{$item}}
 					</ui-select-match>
@@ -98,7 +109,13 @@
 					</ui-select-choices>
 				</ui-select>   
 			</td>
-			<td>
+			<td class="col-md-1">
+			    <input class="form-control col-md-12" type="password" ng-model="userCreation.password" placeholder="Password">
+			</td>
+			<td class="col-md-1">
+				<input class="form-control col-md-12" type="password" ng-model="userCreation.passwordConfirm" placeholder="Password again">
+			</td>
+			<td class="col-md-1">
 				<button type="button" ng-click="AddToArray()" class="btn btn-primary">
 					Add
 				</button>
