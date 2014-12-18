@@ -57,7 +57,7 @@
 				<input placeholder="Email" class="form-control" ng-model="Users[$index].mail" value="user.mail">
 			</td>
 			<td ng-show="user.editing">
-				<ui-select multiple tagging tagging-label="false" ng-model="Users[$index].role" theme="select2" ng-disabled="disabled" style="width: 300px;">
+				<ui-select id="role-{{$index}}" multiple tagging tagging-label="false" ng-model="Users[$index].role" theme="select2" ng-disabled="disabled" style="width: 300px;">
 					<ui-select-match placeholder="Select roles...">
 						{{$item}}
 					</ui-select-match>
@@ -89,7 +89,7 @@
 				<input class="form-control" type="password" ng-model="userCreation.passwordConfirm" placeholder="Password again">
 			</td>
 			<td>
-				<ui-select multiple tagging tagging-label="false" ng-model="userCreation.role" theme="select2" ng-disabled="disabled" style="width: 300px;">
+				<ui-select multiple tagging tagging-label="false" id="role_input" ng-model="userCreation.role" theme="select2" ng-disabled="disabled" style="width: 300px;">
 					<ui-select-match placeholder="Select roles...">
 						{{$item}}
 					</ui-select-match>

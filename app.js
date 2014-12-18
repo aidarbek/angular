@@ -39,14 +39,18 @@ function AddUser($scope, roles)
 				//tmp.user_id = 1;
 				//console.log("HUI!");
 				//console.log($scope.userCreation);
-				console.log($scope.userCreation.role);
-				console.log($scope.userCreation);
-				console.log(roles);
+				for(var i = 0; i < roles.length; i++)
+				{
+					$scope.roles.push(roles[i]);
+				}
 				$scope.Users.push($scope.userCreation);
 				//console.log($scope.Users[$scope.Users.length - 1]);
 				$scope.Users[$scope.Users.length - 1].role = angular.copy($scope.userCreation.role);
 				//$scope.userCreation = {role: []};
 				//console.log($scope.Users);
+				$scope.userCreation = {role: []};
+				//$('#role_input .ng-binding').html("");
+				$('#role_input input').val("");//Clear the role input field
 			}
 			else
 			{
@@ -119,5 +123,6 @@ App.controller('User', ['$scope','Users' , '$http', function ($scope, Users, $ht
 			}
 		}
 		$scope.Users[index].editing = false;
+		$('#role-'+index + ' input').val("");//Clear the fole input field 
 	}
 }]);
