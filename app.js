@@ -41,7 +41,8 @@ function AddUser($scope, roles)
 				//console.log($scope.userCreation);
 				for(var i = 0; i < roles.length; i++)
 				{
-					$scope.roles.push(roles[i]);
+					if($scope.roles.indexOf(roles[i]) == -1)
+						$scope.roles.push(roles[i]);
 				}
 				$scope.Users.push($scope.userCreation);
 				//console.log($scope.Users[$scope.Users.length - 1]);
